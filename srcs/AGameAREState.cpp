@@ -10,11 +10,16 @@ AGameAREState::AGameAREState()
 
 AGameAREState::~AGameAREState() {}
 
-void AGameAREState::init(sf::RenderWindow&) {}
-
-void AGameAREState::update(sf::RenderWindow& window, State** self, float fElapsedTime)
+void AGameAREState::init(sf::RenderWindow&)
 {
-	AGameState::update(window, self, fElapsedTime);
+	if(aGameData->tetrominoLockRow == - 1)
+		return;
+	areFrameDelay = 10 + (5 - (aGameData->tetrominoLockRow + 3) / 4);
+	secondsSinceInit = 0;
+}
+
+void AGameAREState::setUpNextTetromino()
+{
 	TetrominoType nextType;
 	if(aGameData->currentTetromino.type == TetrominoType::NONE)
 		nextType = static_cast<TetrominoType>(dist6(rng));
@@ -32,7 +37,22 @@ void AGameAREState::update(sf::RenderWindow& window, State** self, float fElapse
 	else
 		aGameData->currentTetromino.move({4, 0});
 	aGameData->updateBoard();
-	*self = aGameFallingState;
+}
+
+void AGameAREState::update(sf::RenderWindow&, State** self, float fElapsedTime)
+{
+	secondsSinceInit += fElapsedTime;
+	if(aGameData->tetrominoLockRow == -1)
+	{
+		setUpNextTetromino();
+		*self = aGameFallingState;
+		return;
+	}
+	if(secondsSinceInit >= aGameData->frameDuration * areFrameDelay)
+	{
+		setUpNextTetromino();
+		*self = aGameFallingState;
+	}
 }
 
 void AGameAREState::draw(sf::RenderWindow& window) const

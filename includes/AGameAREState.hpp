@@ -14,11 +14,14 @@ class AGameAREState: public AGameState
 	std::mt19937 rng;
 	std::uniform_int_distribution<std::mt19937::result_type> dist6;
 	std::uniform_int_distribution<std::mt19937::result_type> dist7;
+	float areFrameDelay;
+	float secondsSinceInit;
 
 	public:
 		AGameAREState();
 		~AGameAREState();
 		void init(sf::RenderWindow&);
+		void setUpNextTetromino();
 		void update(sf::RenderWindow&, State**, float);
 		void draw(sf::RenderWindow&) const;
 };

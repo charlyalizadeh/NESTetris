@@ -3,6 +3,9 @@
 
 AGameData::AGameData():
 	currentTetromino(Tetromino(TetrominoType::NONE)),
+	tetrominoLockRow(-1),
+	fps(60.0988),
+	frameDuration(1.0 / 60.0988),
 	gravity(48),
 	gravityTable({
 			48, 43, 38, 33, 28, 23, 18, 13, 8, 6,
@@ -146,4 +149,9 @@ void AGameData::updateBoard()
 		int indexBoard = currentTetromino.coords[i].y * 10 + currentTetromino.coords[i].x;
 		board[indexBoard] = 1;
 	}
+}
+
+void AGameData::setLockRow()
+{
+	tetrominoLockRow = currentTetromino.down();
 }

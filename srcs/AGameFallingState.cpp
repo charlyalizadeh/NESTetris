@@ -40,7 +40,11 @@ void AGameFallingState::update(sf::RenderWindow& window, State** self, float fEl
 		lastFall = 0;
 	}
 	if(!aGameData->isMovableDown())
+	{
+		aGameData->setLockRow();
 		*self = aGameAREState;
+		(*self)->init(window);
+	}
 }
 
 void AGameFallingState::draw(sf::RenderWindow& window) const

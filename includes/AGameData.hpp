@@ -23,6 +23,9 @@ class AGameData
 		std::array<int, 200> board;
 		std::array<int,6> tetrominosCount;
 		Tetromino currentTetromino;
+		int tetrominoLockRow;
+		float fps;
+		float frameDuration;
 
 		int getLevel() const;
 		int getGravity() const;
@@ -36,6 +39,7 @@ class AGameData
 		void moveRight();
 		void moveLeft();
 		void updateBoard();
+		void setLockRow();
 
 	private:
 		int gravity;
