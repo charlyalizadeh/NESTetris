@@ -4,8 +4,8 @@
 AGameAREState::AGameAREState()
 {
 	rng = std::mt19937(dev());
-	dist6 = std::uniform_int_distribution<std::mt19937::result_type>(0, 5);
 	dist7 = std::uniform_int_distribution<std::mt19937::result_type>(0, 6);
+	dist8 = std::uniform_int_distribution<std::mt19937::result_type>(0, 7);
 }
 
 AGameAREState::~AGameAREState() {}
@@ -22,15 +22,15 @@ void AGameAREState::setUpNextTetromino()
 {
 	TetrominoType nextType;
 	if(aGameData->currentTetromino.type == TetrominoType::NONE)
-		nextType = static_cast<TetrominoType>(dist6(rng));
+		nextType = static_cast<TetrominoType>(dist7(rng));
 	else
 	{
-		nextType = static_cast<TetrominoType>(dist7(rng));
+		nextType = static_cast<TetrominoType>(dist8(rng));
 		if(nextType == aGameData->currentTetromino.type || nextType == TetrominoType::NONE)
-			nextType = static_cast<TetrominoType>(dist6(rng));
+			nextType = static_cast<TetrominoType>(dist7(rng));
 	}
 	aGameData->currentTetromino = Tetromino(nextType);
-	if(nextType == TetrominoType::L)
+	if(nextType == TetrominoType::I)
 		aGameData->currentTetromino.move({3, 0});
 	else if(nextType == TetrominoType::O)
 		aGameData->currentTetromino.move({4, 0});

@@ -1,7 +1,28 @@
 #include "../includes/Tetromino.hpp"
 
 
-Tetromino::Tetromino(TetrominoType type): type(type)  {}
+static void rotateCoordsLeft(sf::Vector2f origin, std::array<sf::Vector2f,4>& coords, int dim)
+{
+	for(auto& coord: coords)
+	{
+		sf::Vector2f coord_norm = coord - origin;
+		coord.x = origin.x + coord_norm.y;
+		coord.y = origin.y + (dim - 1 - coord_norm.x);
+	}
+}
+
+static void rotateCoordsRight(sf::Vector2f origin, std::array<sf::Vector2f,4>& coords, int dim)
+{
+	for(auto& coord: coords)
+	{
+		sf::Vector2f coord_norm = coord - origin;
+		coord.x = origin.x + (dim - 1 - coord_norm.y);
+		coord.y = origin.y + coord_norm.x;
+	}
+}
+
+
+Tetromino::Tetromino(TetrominoType type): type(type), rotation(0)  {}
 
 void Tetromino::move(sf::Vector2f new_origin)
 {
@@ -14,19 +35,22 @@ void Tetromino::move(sf::Vector2f new_origin)
 void Tetromino::moveDown()
 {
 	origin.y++;
-	move(origin);
+	for(auto& c: coords)
+		c.y++;
 }
 
 void Tetromino::moveRight()
 {
 	origin.x++;
-	move(origin);
+	for(auto& c: coords)
+		c.x++;
 }
 
 void Tetromino::moveLeft()
 {
 	origin.x--;
-	move(origin);
+	for(auto& c: coords)
+		c.x--;
 }
 
 int Tetromino::up() const
@@ -63,6 +87,99 @@ int Tetromino::right() const
 		if(coords[i].x > _right)
 			_right = coords[i].x;
 	return _right;
+}
+
+void Tetromino::rotateI()
+{
+	sf::Vector2f rotationOrigin = origin;
+	rotationOrigin.y -= 2;
+	if(rotation == 0)
+	{
+		rotateCoordsLeft(rotationOrigin, coords, 4);
+		rotation = 1;
+	}
+	else
+	{
+		rotateCoordsRight(rotationOrigin, coords, 4);
+		rotation = 0;
+	}
+}
+
+void Tetromino::rotateZS()
+{
+	sf::Vector2f rotationOrigin = origin;
+	rotationOrigin.y--;
+	if(rotation == 0)
+	{
+		rotateCoordsLeft(rotationOrigin, coords, 3);
+		rotation = 1;
+	}
+	else
+	{
+		rotateCoordsRight(rotationOrigin, coords, 3);
+		rotation = 0;
+	}
+}
+
+void Tetromino::rotateLeftTLJ()
+{
+	sf::Vector2f rotationOrigin = origin;
+	rotationOrigin.y--;
+	rotateCoordsLeft(rotationOrigin, coords, 3);
+}
+
+void Tetromino::rotateRightTLJ()
+{
+	sf::Vector2f rotationOrigin = origin;
+	rotationOrigin.y--;
+	rotateCoordsRight(rotationOrigin, coords, 3);
+}
+
+void Tetromino::rotateLeft()
+{
+	switch(type)
+	{
+		case TetrominoType::O:
+			break;
+		case TetrominoType::I:
+			rotateI();
+			break;
+		case TetrominoType::Z:
+		case TetrominoType::S:
+			rotateZS();
+			break;
+		case TetrominoType::T:
+		case TetrominoType::L:
+		case TetrominoType::J:
+			rotateLeftTLJ();
+			break;
+		default:
+			break;
+	}
+}
+
+
+void Tetromino::rotateRight()
+{
+	switch(type)
+	{
+		case TetrominoType::O:
+			break;
+		case TetrominoType::I:
+			rotateI();
+			break;
+		case TetrominoType::Z:
+		case TetrominoType::S:
+			rotateZS();
+			break;
+		case TetrominoType::T:
+		case TetrominoType::L:
+		case TetrominoType::J:
+			rotateRightTLJ();
+			break;
+		default:
+			break;
+	}
 }
 
 bool Tetromino::isInCoords(sf::Vector2f coord) const

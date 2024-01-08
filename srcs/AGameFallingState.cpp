@@ -24,6 +24,12 @@ void AGameFallingState::updateEvent(sf::RenderWindow&, State**, float, sf::Event
 				if(aGameData->isMovableLeft())
 					aGameData->moveLeft();
 				break;
+			case sf::Keyboard::F:
+				aGameData->rotateRight();
+				break;
+			case sf::Keyboard::D:
+				aGameData->rotateLeft();
+				break;
 			default:
 				break;
 		}

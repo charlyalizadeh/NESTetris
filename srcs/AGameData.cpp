@@ -101,6 +101,21 @@ bool AGameData::isMovableLeft() const
 	return true;
 }
 
+void AGameData::removeTetrominoFromBoard()
+{
+	for(auto &coord: currentTetromino.coords)
+		board[coord.y * 10 + coord.x] = 0;
+}
+
+void AGameData::updateBoard()
+{
+	for(size_t i = 0; i < 4; i++)
+	{
+		int indexBoard = currentTetromino.coords[i].y * 10 + currentTetromino.coords[i].x;
+		board[indexBoard] = 1;
+	}
+}
+
 void AGameData::setLevel(int val)
 {
 	if(val < 0)
@@ -128,28 +143,32 @@ void AGameData::moveDown()
 
 void AGameData::moveRight()
 {
-	for(auto &coord: currentTetromino.coords)
-		board[coord.y * 10 + coord.x] = 0;
+	removeTetrominoFromBoard();
 	currentTetromino.moveRight();
 	updateBoard();
 }
 
 void AGameData::moveLeft()
 {
-	for(auto &coord: currentTetromino.coords)
-		board[coord.y * 10 + coord.x] = 0;
+	removeTetrominoFromBoard();
 	currentTetromino.moveLeft();
 	updateBoard();
 }
 
-void AGameData::updateBoard()
+void AGameData::rotateRight()
 {
-	for(size_t i = 0; i < 4; i++)
-	{
-		int indexBoard = currentTetromino.coords[i].y * 10 + currentTetromino.coords[i].x;
-		board[indexBoard] = 1;
-	}
+	removeTetrominoFromBoard();
+	currentTetromino.rotateRight();
+	updateBoard();
 }
+
+void AGameData::rotateLeft()
+{
+	removeTetrominoFromBoard();
+	currentTetromino.rotateLeft();
+	updateBoard();
+}
+
 
 void AGameData::setLockRow()
 {

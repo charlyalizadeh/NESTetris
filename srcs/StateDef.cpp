@@ -9,11 +9,12 @@
 #include "Tetromino.hpp"
 #include "TitleScreenState.hpp"
 
-const std::array<std::array<sf::Vector2f,4>,6> Tetromino::tetrominoPattern = {{
-	{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(0, 1), sf::Vector2f(1, 1)}, // O
+const std::array<std::array<sf::Vector2f,4>,7> Tetromino::tetrominoPattern = {{
+		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(2, 0), sf::Vector2f(3, 0)}, // I
+		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(0, 1), sf::Vector2f(1, 1)}, // O
 		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(2, 0), sf::Vector2f(1, 1)}, // T
 		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(2, 0), sf::Vector2f(2, 1)}, // J
-		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(2, 0), sf::Vector2f(3, 0)}, // L
+		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(2, 0), sf::Vector2f(0, 1)}, // L
 		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(1, 1), sf::Vector2f(2, 1)}, // Z
 		{sf::Vector2f(0, 1), sf::Vector2f(1, 1), sf::Vector2f(1, 0), sf::Vector2f(2, 0)}  // S
 }};

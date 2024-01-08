@@ -38,10 +38,14 @@ class AGameData
 		void moveDown();
 		void moveRight();
 		void moveLeft();
+		void rotateRight();
+		void rotateLeft();
 		void updateBoard();
 		void setLockRow();
 
 	private:
+		void removeTetrominoFromBoard();
+
 		int gravity;
 		std::array<int,30> gravityTable;
 		int level;
