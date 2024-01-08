@@ -21,7 +21,8 @@ class AGameAREState: public AGameState
 		AGameAREState();
 		~AGameAREState();
 		void init(sf::RenderWindow&);
-		void setUpNextTetromino();
+		TetrominoType getNextType();
+		void setupCurrentTetromino();
 		void update(sf::RenderWindow&, State**, float);
 		void draw(sf::RenderWindow&) const;
 };

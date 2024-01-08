@@ -16,13 +16,14 @@ class AGameData
 		std::map<std::string,sf::Texture> textures;
 		std::map<std::string,sf::Sprite> sprites;
 		std::array<sf::Sprite,10> statsSprites;
-		sf::Texture tetrominoeSpriteSheet;
-		std::array<std::array<sf::Sprite,3>,10> tetrominoeSprites;
+		sf::Texture tetrominoSpriteSheet;
+		std::array<std::array<sf::Sprite,3>,10> tetrominoSprites;
 
 		// Other
 		std::array<int, 200> board;
 		std::array<int,6> tetrominosCount;
 		Tetromino currentTetromino;
+		Tetromino nextTetromino;
 		int tetrominoLockRow;
 		float fps;
 		float frameDuration;
@@ -32,6 +33,7 @@ class AGameData
 		bool isMovableDown() const;
 		bool isMovableRight() const;
 		bool isMovableLeft() const;
+		int getTetrominoSpriteId(TetrominoType) const;
 
 		void setLevel(int);
 		void clearData();

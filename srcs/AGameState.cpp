@@ -32,9 +32,11 @@ void AGameState::update(sf::RenderWindow& window, State** self, float fElapsedTi
     }
 }
 
-void AGameState::draw_playfield(sf::RenderWindow& window) const
+void AGameState::drawPlayfield(sf::RenderWindow& window) const
 {
 	int cell_val;
+	sf::Sprite sprite;
+
 	for(size_t i = 0; i < 20; i++)
 	{
 		for(size_t j = 0; j < 10; j++)
@@ -42,13 +44,40 @@ void AGameState::draw_playfield(sf::RenderWindow& window) const
 			cell_val = aGameData->board[i * 10 + j];
 			if(cell_val != 0)
 			{
-				aGameData->tetrominoeSprites[aGameData->getLevel()][cell_val - 1].setPosition({
+				sprite = aGameData->tetrominoSprites[aGameData->getLevel()][cell_val - 1];
+				sprite.setPosition({
 						(float)(96 + j * 8),
 						(float)(40 + i * 8)
 				});
-				window.draw(aGameData->tetrominoeSprites[aGameData->getLevel()][cell_val - 1]);
+				window.draw(sprite);
 			}
 		}
+	}
+}
+
+void AGameState::drawNextTetromino(sf::RenderWindow& window) const
+{
+	sf::Vector2f originDraw;
+	switch(aGameData->nextTetromino.type)
+	{
+		case TetrominoType::O:
+			originDraw = {200, 112};
+			break;
+		case TetrominoType::I:
+			originDraw = {192, 116};
+			break;
+		default:
+			originDraw = {196, 112};
+	}
+	aGameData->nextTetromino.move({0, 0});
+	sf::Sprite sprite = aGameData->tetrominoSprites[aGameData->getLevel()][aGameData->getTetrominoSpriteId(aGameData->nextTetromino.type) - 1];
+	for(auto const& c: aGameData->nextTetromino.coords)
+	{
+		sprite.setPosition({
+				originDraw.x + c.x * 8,
+				originDraw.y + c.y * 8
+		});
+		window.draw(sprite);
 	}
 }
 
@@ -57,5 +86,6 @@ void AGameState::draw(sf::RenderWindow& window) const
     window.clear(sf::Color::Black);
 	window.draw(aGameData->sprites["game"]);
 	window.draw(aGameData->statsSprites[aGameData->getLevel() % 10]);
-	draw_playfield(window);
+	drawPlayfield(window);
+	drawNextTetromino(window);
 }

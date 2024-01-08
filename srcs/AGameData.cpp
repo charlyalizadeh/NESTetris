@@ -3,6 +3,7 @@
 
 AGameData::AGameData():
 	currentTetromino(Tetromino(TetrominoType::NONE)),
+	nextTetromino(Tetromino(TetrominoType::NONE)),
 	tetrominoLockRow(-1),
 	fps(60.0988),
 	frameDuration(1.0 / 60.0988),
@@ -38,13 +39,13 @@ AGameData::AGameData():
     statsSprites[7].setTexture(textures["stats7"]);
     statsSprites[8].setTexture(textures["stats8"]);
     statsSprites[9].setTexture(textures["stats9"]);
-	tetrominoeSpriteSheet.loadFromFile("static/sprite/tetrominoes_sheet.png");
+	tetrominoSpriteSheet.loadFromFile("static/sprite/tetrominoes_sheet.png");
 	for(int i = 0; i < 10; i++)
 	{
 		for(int j = 0; j < 3; j++)
 		{
-			tetrominoeSprites[i][j].setTexture(tetrominoeSpriteSheet);
-			tetrominoeSprites[i][j].setTextureRect({j * 7, i * 7, 7, 7});
+			tetrominoSprites[i][j].setTexture(tetrominoSpriteSheet);
+			tetrominoSprites[i][j].setTextureRect({j * 7, i * 7, 7, 7});
 		}
 	}
 	for(size_t i = 0; i < 10; i++)
@@ -101,6 +102,26 @@ bool AGameData::isMovableLeft() const
 	return true;
 }
 
+int AGameData::getTetrominoSpriteId(TetrominoType type) const
+{
+	switch(type)
+	{
+		case TetrominoType::T:
+		case TetrominoType::O:
+		case TetrominoType::I:
+			return 1;
+		case TetrominoType::J:
+		case TetrominoType::S:
+			return 2;
+		case TetrominoType::Z:
+		case TetrominoType::L:
+			return 3;
+		default:
+			return 0;
+	}
+	return 0;
+}
+
 void AGameData::removeTetrominoFromBoard()
 {
 	for(auto &coord: currentTetromino.coords)
@@ -112,7 +133,7 @@ void AGameData::updateBoard()
 	for(size_t i = 0; i < 4; i++)
 	{
 		int indexBoard = currentTetromino.coords[i].y * 10 + currentTetromino.coords[i].x;
-		board[indexBoard] = 1;
+		board[indexBoard] = getTetrominoSpriteId(currentTetromino.type);
 	}
 }
 
