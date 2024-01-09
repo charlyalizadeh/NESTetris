@@ -38,6 +38,7 @@ TetrominoType AGameAREState::getNextType()
 void AGameAREState::setupCurrentTetromino()
 {
 	aGameData->currentTetromino = Tetromino(aGameData->nextTetromino.type);
+	aGameData->tetrominosCount[static_cast<int>(aGameData->currentTetromino.type)]++;
 	if(aGameData->currentTetromino.type == TetrominoType::I)
 		aGameData->currentTetromino.move({3, 0});
 	else if(aGameData->currentTetromino.type == TetrominoType::O)

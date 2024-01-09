@@ -7,13 +7,13 @@
 
 enum class TetrominoType
 {
-	I,
-    O,
-    T,
-    J,
-    L,
-    Z,
-    S,
+	I, // 0
+    O, // 1
+    T, // 2
+    J, // 3
+    L, // 4
+    Z, // 5
+    S, // 6
 	NONE
 };
 

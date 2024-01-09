@@ -81,11 +81,39 @@ void AGameState::drawNextTetromino(sf::RenderWindow& window) const
 	}
 }
 
+void AGameState::drawStatNumber(sf::RenderWindow& window, int number, sf::Vector2f origin) const
+{
+	int digit;
+
+	digit = number / 100;
+	aGameData->statsDigitSprites[digit].setPosition(origin);
+	window.draw(aGameData->statsDigitSprites[digit]);
+
+	digit = (number / 10) % 10;
+	origin.x += 8;
+	aGameData->statsDigitSprites[digit].setPosition(origin);
+	window.draw(aGameData->statsDigitSprites[digit]);
+
+	digit = number % 10;
+	origin.x += 8;
+	aGameData->statsDigitSprites[digit].setPosition(origin);
+	window.draw(aGameData->statsDigitSprites[digit]);
+}
+
+void AGameState::drawStats(sf::RenderWindow& window) const
+{
+	std::array<int,7> order = {2, 3, 5, 1, 6, 4, 0};
+	std::array<int,7> yCoords = {88, 104, 120, 136, 152, 168, 184};
+	for(int i = 0; i < 7; i++)
+		drawStatNumber(window, aGameData->tetrominosCount[order[i]], sf::Vector2f(48, yCoords[i]));
+}
+
 void AGameState::draw(sf::RenderWindow& window) const
 {
     window.clear(sf::Color::Black);
-	window.draw(aGameData->sprites["game"]);
+	window.draw(aGameData->gameSprite);
 	window.draw(aGameData->statsSprites[aGameData->getLevel() % 10]);
 	drawPlayfield(window);
 	drawNextTetromino(window);
+	drawStats(window);
 }

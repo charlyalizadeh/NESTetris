@@ -29,7 +29,18 @@ AGameData::AGameData():
     textures["stats7"].loadFromFile("static/sprite/a_game_stats7.png");
     textures["stats8"].loadFromFile("static/sprite/a_game_stats8.png");
     textures["stats9"].loadFromFile("static/sprite/a_game_stats9.png");
-    sprites["game"].setTexture(textures["game"]);
+	textures["statsDigit0"].loadFromFile("static/sprite/stat_digit_0.png");
+	textures["statsDigit1"].loadFromFile("static/sprite/stat_digit_1.png");
+	textures["statsDigit2"].loadFromFile("static/sprite/stat_digit_2.png");
+	textures["statsDigit3"].loadFromFile("static/sprite/stat_digit_3.png");
+	textures["statsDigit4"].loadFromFile("static/sprite/stat_digit_4.png");
+	textures["statsDigit5"].loadFromFile("static/sprite/stat_digit_5.png");
+	textures["statsDigit6"].loadFromFile("static/sprite/stat_digit_6.png");
+	textures["statsDigit7"].loadFromFile("static/sprite/stat_digit_7.png");
+	textures["statsDigit8"].loadFromFile("static/sprite/stat_digit_8.png");
+	textures["statsDigit9"].loadFromFile("static/sprite/stat_digit_9.png");
+    gameSprite.setTexture(textures["game"]);
+
     statsSprites[0].setTexture(textures["stats0"]);
     statsSprites[1].setTexture(textures["stats1"]);
     statsSprites[2].setTexture(textures["stats2"]);
@@ -40,6 +51,18 @@ AGameData::AGameData():
     statsSprites[7].setTexture(textures["stats7"]);
     statsSprites[8].setTexture(textures["stats8"]);
     statsSprites[9].setTexture(textures["stats9"]);
+
+    statsDigitSprites[0].setTexture(textures["statsDigit0"]);
+    statsDigitSprites[1].setTexture(textures["statsDigit1"]);
+    statsDigitSprites[2].setTexture(textures["statsDigit2"]);
+    statsDigitSprites[3].setTexture(textures["statsDigit3"]);
+    statsDigitSprites[4].setTexture(textures["statsDigit4"]);
+    statsDigitSprites[5].setTexture(textures["statsDigit5"]);
+    statsDigitSprites[6].setTexture(textures["statsDigit6"]);
+    statsDigitSprites[7].setTexture(textures["statsDigit7"]);
+    statsDigitSprites[8].setTexture(textures["statsDigit8"]);
+    statsDigitSprites[9].setTexture(textures["statsDigit9"]);
+
 	tetrominoSpriteSheet.loadFromFile("static/sprite/tetrominoes_sheet.png");
 	for(int i = 0; i < 10; i++)
 	{
@@ -50,10 +73,10 @@ AGameData::AGameData():
 		}
 	}
 	for(size_t i = 0; i < 10; i++)
-		statsSprites[i].setPosition({26.f, 85.f});
+		statsSprites[i].setPosition({24.f, 85.f});
 	for(size_t i = 0; i < 200; i++)
 		board[i] = 0;
-	for(size_t i = 0; i < 6; i++)
+	for(size_t i = 0; i < 7; i++)
 		tetrominosCount[i] = 0;
 }
 
@@ -134,7 +157,8 @@ void AGameData::updateBoard()
 	for(size_t i = 0; i < 4; i++)
 	{
 		int indexBoard = currentTetromino.coords[i].y * 10 + currentTetromino.coords[i].x;
-		board[indexBoard] = getTetrominoSpriteId(currentTetromino.type);
+		if(!(indexBoard < 0 || indexBoard >= 200))
+			board[indexBoard] = getTetrominoSpriteId(currentTetromino.type);
 	}
 }
 

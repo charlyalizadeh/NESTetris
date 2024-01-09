@@ -15,6 +15,8 @@ class AGameState: public State
 		virtual void update(sf::RenderWindow&, State**, float);
 		void drawPlayfield(sf::RenderWindow&) const;
 		void drawNextTetromino(sf::RenderWindow&) const;
+		void drawStatNumber(sf::RenderWindow&, int number, sf::Vector2f origin) const;
+		void drawStats(sf::RenderWindow&) const;
 		virtual void draw(sf::RenderWindow&) const;
 		void clearGame(sf::RenderWindow&);
 };

@@ -14,14 +14,15 @@ class AGameData
 
 		// Textures and Sprites
 		std::map<std::string,sf::Texture> textures;
-		std::map<std::string,sf::Sprite> sprites;
+		sf::Sprite gameSprite;
 		std::array<sf::Sprite,10> statsSprites;
+		std::array<sf::Sprite,10> statsDigitSprites;
 		sf::Texture tetrominoSpriteSheet;
 		std::array<std::array<sf::Sprite,3>,10> tetrominoSprites;
 
 		// Other
-		std::array<int, 200> board;
-		std::array<int,6> tetrominosCount;
+		std::array<int,200> board;
+		std::array<int,7> tetrominosCount;
 		Tetromino currentTetromino;
 		Tetromino nextTetromino;
 		int tetrominoLockRow;
