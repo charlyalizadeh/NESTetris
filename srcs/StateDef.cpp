@@ -1,13 +1,14 @@
-#include "AGameAREState.hpp"
-#include "AGameData.hpp"
-#include "AGameFallingState.hpp"
-#include "AGameState.hpp"
-#include "AMenuState.hpp"
-#include "OptionMenuState.hpp"
-#include "StateDef.hpp"
-#include "State.hpp"
-#include "Tetromino.hpp"
-#include "TitleScreenState.hpp"
+#include "../includes/Tetromino.hpp"
+#include "../includes/State.hpp"
+#include "../includes/StateDef.hpp"
+#include "../includes/TitleScreenState.hpp"
+#include "../includes/OptionMenuState.hpp"
+#include "../includes/AMenuState.hpp"
+#include "../includes/AGameData.hpp"
+#include "../includes/AGameState.hpp"
+#include "../includes/AGameAREState.hpp"
+#include "../includes/AGameFallingState.hpp"
+#include "../includes/AGameDASState.hpp"
 
 const std::array<std::array<sf::Vector2f,4>,7> Tetromino::tetrominoPattern = {{
 		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(2, 0), sf::Vector2f(3, 0)}, // I
@@ -26,3 +27,5 @@ AGameData *aGameData = new AGameData();
 State *aGameState = new AGameState();
 State *aGameAREState = new AGameAREState();
 State *aGameFallingState = new AGameFallingState();
+State *aGameDASRightState = new AGameDASState(DASDirection::Right);
+State *aGameDASLeftState = new AGameDASState(DASDirection::Left);

@@ -11,5 +11,7 @@ extern AGameData *aGameData;
 extern State *aGameState;
 extern State *aGameAREState;
 extern State *aGameFallingState;
+extern State *aGameDASRightState;
+extern State *aGameDASLeftState;
 
 #endif

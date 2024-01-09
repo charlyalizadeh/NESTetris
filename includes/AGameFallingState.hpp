@@ -14,10 +14,10 @@ class AGameFallingState: public AGameState
 	public:
 		AGameFallingState();
 		~AGameFallingState();
-		void init(sf::RenderWindow&);
-		void updateEvent(sf::RenderWindow&, State**, float, sf::Event);
-		void update(sf::RenderWindow&, State**, float);
-		void draw(sf::RenderWindow&) const;
+		virtual void init(sf::RenderWindow&);
+		virtual void updateEvent(sf::RenderWindow&, State**, float, sf::Event);
+		virtual void update(sf::RenderWindow&, State**, float);
+		virtual void draw(sf::RenderWindow&) const;
 };
 
 #endif
