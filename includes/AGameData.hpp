@@ -27,6 +27,7 @@ class AGameData
 		int tetrominoLockRow;
 		float fps;
 		float frameDuration;
+		bool isDownPressed;
 
 		int getLevel() const;
 		int getGravity() const;

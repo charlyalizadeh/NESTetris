@@ -49,13 +49,14 @@ void AGameAREState::setupCurrentTetromino()
 }
 
 
-void AGameAREState::update(sf::RenderWindow&, State** self, float fElapsedTime)
+void AGameAREState::update(sf::RenderWindow& window, State** self, float fElapsedTime)
 {
 	secondsSinceInit += fElapsedTime;
 	if(aGameData->tetrominoLockRow == -1 || (secondsSinceInit >= aGameData->frameDuration * areFrameDelay))
 	{
 		setupCurrentTetromino();
 		*self = aGameFallingState;
+		(*self)->init(window);
 	}
 }
 

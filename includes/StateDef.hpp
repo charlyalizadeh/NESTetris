@@ -13,5 +13,6 @@ extern State *aGameAREState;
 extern State *aGameFallingState;
 extern State *aGameDASRightState;
 extern State *aGameDASLeftState;
+extern State *aGameSoftDropState;
 
 #endif

@@ -7,6 +7,7 @@ AGameData::AGameData():
 	tetrominoLockRow(-1),
 	fps(60.0988),
 	frameDuration(1.0 / 60.0988),
+	isDownPressed(false),
 	gravity(48),
 	gravityTable({
 			48, 43, 38, 33, 28, 23, 18, 13, 8, 6,

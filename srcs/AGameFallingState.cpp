@@ -12,6 +12,17 @@ void AGameFallingState::init(sf::RenderWindow&)
 
 void AGameFallingState::updateEvent(sf::RenderWindow& window, State** self, float, sf::Event event)
 {
+	if(event.type == sf::Event::KeyReleased)
+	{
+		switch(event.key.code)
+		{
+			case sf::Keyboard::Down:
+				aGameData->isDownPressed = false;
+				break;
+			default:
+				break;
+		}
+	}
 	if(event.type == sf::Event::KeyPressed)
 	{
 		switch(event.key.code)
@@ -22,6 +33,13 @@ void AGameFallingState::updateEvent(sf::RenderWindow& window, State** self, floa
 				break;
 			case sf::Keyboard::Left:
 				*self = aGameDASLeftState;
+				(*self)->init(window);
+				break;
+			case sf::Keyboard::Down:
+				if(aGameData->isDownPressed)
+					break;
+				aGameData->isDownPressed = true;
+				*self = aGameSoftDropState;
 				(*self)->init(window);
 				break;
 			case sf::Keyboard::F:
