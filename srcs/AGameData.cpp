@@ -92,11 +92,16 @@ int AGameData::getGravity() const
 
 bool AGameData::isMovableDown() const
 {
+	int index;
+
 	for(const auto &coord: currentTetromino.coords)
 	{
+		if(coord.y < 0)
+			continue;
 		if(coord.y == 19)
 			return false;
-		if(!currentTetromino.isInCoords({coord.x, coord.y + 1}) && board[(coord.y + 1) * 10 + coord.x] != 0)
+		index = (coord.y + 1) * 10 + coord.x;
+		if(!currentTetromino.isInCoords({coord.x, coord.y + 1}) && board[index] != 0)
 			return false;
 	}
 	return true;
@@ -104,11 +109,16 @@ bool AGameData::isMovableDown() const
 
 bool AGameData::isMovableRight() const
 {
+	int index;
+
 	for(const auto &coord: currentTetromino.coords)
 	{
 		if(coord.x == 9)
 			return false;
-		if(!currentTetromino.isInCoords({coord.x + 1, coord.y}) && board[(coord.y) * 10 + coord.x + 1] != 0)
+		if(coord.y < 0)
+			continue;
+		index = (coord.y) * 10 + coord.x + 1;
+		if(!currentTetromino.isInCoords({coord.x + 1, coord.y}) && board[index] != 0)
 			return false;
 	}
 	return true;
@@ -116,11 +126,16 @@ bool AGameData::isMovableRight() const
 
 bool AGameData::isMovableLeft() const
 {
+	int index;
+
 	for(const auto &coord: currentTetromino.coords)
 	{
 		if(coord.x == 0)
 			return false;
-		if(!currentTetromino.isInCoords({coord.x - 1, coord.y}) && board[(coord.y) * 10 + coord.x - 1] != 0)
+		if(coord.y < 0)
+			continue;
+		index = (coord.y) * 10 + coord.x - 1;
+		if(!currentTetromino.isInCoords({coord.x - 1, coord.y}) && board[index] != 0)
 			return false;
 	}
 	return true;
