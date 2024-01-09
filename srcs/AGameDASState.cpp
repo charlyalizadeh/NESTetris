@@ -19,15 +19,13 @@ bool AGameDASState::isMovable()
 	return aGameData->isMovableLeft();
 }
 
-void AGameDASState::init(sf::RenderWindow& window)
+void AGameDASState::init(sf::RenderWindow&)
 {
-	AGameFallingState::init(window);
 	move();
 	firstMove = true;
-	lastMove = 0;
 }
 
-void AGameDASState::updateEvent(sf::RenderWindow& window, State** self, float, sf::Event event)
+void AGameDASState::updateEvent(sf::RenderWindow&, State** self, float, sf::Event event)
 {
 	if(event.type == sf::Event::KeyPressed)
 	{
@@ -49,17 +47,11 @@ void AGameDASState::updateEvent(sf::RenderWindow& window, State** self, float, s
 		{
 			case sf::Keyboard::Right:
 				if(direction == DASDirection::Right)
-				{
 					*self = aGameFallingState;
-					(*self)->init(window);
-				}
 				break;
 			case sf::Keyboard::Left:
 				if(direction == DASDirection::Left)
-				{
 					*self = aGameFallingState;
-					(*self)->init(window);
-				}
 				break;
 			default:
 				break;

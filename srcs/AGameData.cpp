@@ -2,6 +2,7 @@
 
 
 AGameData::AGameData():
+	lastFall(0),
 	currentTetromino(Tetromino(TetrominoType::NONE)),
 	nextTetromino(Tetromino(TetrominoType::NONE)),
 	tetrominoLockRow(-1),

@@ -12,13 +12,13 @@ AGameAREState::~AGameAREState() {}
 
 void AGameAREState::init(sf::RenderWindow&)
 {
+	secondsSinceInit = 0;
 	if(aGameData->tetrominoLockRow == - 1)
 	{
 		aGameData->nextTetromino = Tetromino(getNextType());
 		return;
 	}
 	areFrameDelay = 10 + (5 - (aGameData->tetrominoLockRow + 3) / 4);
-	secondsSinceInit = 0;
 }
 
 TetrominoType AGameAREState::getNextType()

@@ -21,6 +21,7 @@ class AGameData
 		std::array<std::array<sf::Sprite,3>,10> tetrominoSprites;
 
 		// Other
+		float lastFall;
 		std::array<int,200> board;
 		std::array<int,7> tetrominosCount;
 		Tetromino currentTetromino;

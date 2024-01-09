@@ -7,7 +7,7 @@ AGameFallingState::~AGameFallingState() {}
 
 void AGameFallingState::init(sf::RenderWindow&)
 {
-	lastFall = 0;
+	aGameData->lastFall = 0;
 }
 
 void AGameFallingState::updateEvent(sf::RenderWindow& window, State** self, float, sf::Event event)
@@ -57,15 +57,16 @@ void AGameFallingState::updateEvent(sf::RenderWindow& window, State** self, floa
 void AGameFallingState::update(sf::RenderWindow& window, State** self, float fElapsedTime)
 {
 	AGameState::update(window, self, fElapsedTime);
-	lastFall += fElapsedTime;
-	if(aGameData->isMovableDown() && lastFall >= aGameData->getGravity() * aGameData->frameDuration)
+	aGameData->lastFall += fElapsedTime;
+	if(aGameData->isMovableDown() && aGameData->lastFall >= aGameData->getGravity() * aGameData->frameDuration)
 	{
 		aGameData->moveDown();
-		lastFall = 0;
+		aGameData->lastFall = 0;
 	}
 	if(!aGameData->isMovableDown())
 	{
 		aGameData->setLockRow();
+		aGameData->lastFall = 0;
 		*self = aGameAREState;
 		(*self)->init(window);
 	}

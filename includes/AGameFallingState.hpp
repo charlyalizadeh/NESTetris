@@ -9,7 +9,6 @@
 
 class AGameFallingState: public AGameState
 {
-	float lastFall;
 
 	public:
 		AGameFallingState();
