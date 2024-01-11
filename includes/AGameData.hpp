@@ -21,6 +21,8 @@ class AGameData
 		std::array<std::array<sf::Sprite,3>,10> tetrominoSprites;
 
 		// Other
+		float lastFrame;
+		unsigned int frameCounter;
 		float lastFall;
 		std::array<int,200> board;
 		std::array<int,7> tetrominosCount;
@@ -47,6 +49,7 @@ class AGameData
 		void rotateLeft();
 		void updateBoard();
 		void setLockRow();
+		void deleteRows(std::vector<int>);
 
 	private:
 		void removeTetrominoFromBoard();

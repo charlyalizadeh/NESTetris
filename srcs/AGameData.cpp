@@ -1,7 +1,17 @@
 #include "../includes/AGameData.hpp"
 
+static int getNbValAbove(int value, std::vector<int> values)
+{
+	int nbValAbove = 0;
+	int i = values.size() - 1;
+	while(i >= 0 && values[i--] >= value)
+		nbValAbove++;
+	return nbValAbove;
+}
 
 AGameData::AGameData():
+	lastFrame(0),
+	frameCounter(0),
 	lastFall(0),
 	currentTetromino(Tetromino(TetrominoType::NONE)),
 	nextTetromino(Tetromino(TetrominoType::NONE)),
@@ -231,8 +241,27 @@ void AGameData::rotateLeft()
 	updateBoard();
 }
 
-
 void AGameData::setLockRow()
 {
 	tetrominoLockRow = currentTetromino.down();
+}
+
+void AGameData::deleteRows(std::vector<int> rows)
+{
+	std::array<int,200> newBoard;
+	int nbRowUnder;
+
+	for(int i = 0; i < 200; i++)
+		newBoard[i] = 0;
+	for(int y = 19; y >= 0; y--)
+	{
+		if(std::find(rows.begin(), rows.end(), y) != rows.end())
+			continue;
+		nbRowUnder = getNbValAbove(y, rows);
+		if(y + nbRowUnder > 19)
+			continue;
+		for(size_t x = 0; x < 10; x++)
+			newBoard[(y + nbRowUnder) * 10 + x] = board[y * 10 + x];
+	}
+	board = newBoard;
 }

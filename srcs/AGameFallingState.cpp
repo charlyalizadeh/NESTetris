@@ -67,7 +67,7 @@ void AGameFallingState::update(sf::RenderWindow& window, State** self, float fEl
 	{
 		aGameData->setLockRow();
 		aGameData->lastFall = 0;
-		*self = aGameAREState;
+		*self = aGameLockState;
 		(*self)->init(window);
 	}
 }

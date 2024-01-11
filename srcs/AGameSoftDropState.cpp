@@ -39,7 +39,7 @@ void AGameSoftDropState::update(sf::RenderWindow& window, State** self, float fE
 	if(!aGameData->isMovableDown())
 	{
 		aGameData->setLockRow();
-		*self = aGameAREState;
+		*self = aGameLockState;
 		(*self)->init(window);
 	}
 }

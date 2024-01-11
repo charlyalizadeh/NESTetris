@@ -10,6 +10,7 @@
 #include "../includes/AGameFallingState.hpp"
 #include "../includes/AGameDASState.hpp"
 #include "../includes/AGameSoftDropState.hpp"
+#include "../includes/AGameLockState.hpp"
 
 const std::array<std::array<sf::Vector2f,4>,7> Tetromino::tetrominoPattern = {{
 		{sf::Vector2f(0, 0), sf::Vector2f(1, 0), sf::Vector2f(2, 0), sf::Vector2f(3, 0)}, // I
@@ -31,3 +32,4 @@ State *aGameFallingState = new AGameFallingState();
 State *aGameDASRightState = new AGameDASState(DASDirection::Right);
 State *aGameDASLeftState = new AGameDASState(DASDirection::Left);
 State *aGameSoftDropState = new AGameSoftDropState();
+State *aGameLockState = new AGameLockState();

@@ -11,6 +11,12 @@ void AGameState::updateEvent(sf::RenderWindow &, State**, float, sf::Event) {}
 
 void AGameState::update(sf::RenderWindow& window, State** self, float fElapsedTime)
 {
+	aGameData->lastFrame += fElapsedTime;
+	if(aGameData->lastFrame >= aGameData->frameDuration)
+	{
+		aGameData->frameCounter++;
+		aGameData->lastFrame = 0;
+	}
     sf::Event event;
     while(window.pollEvent(event))
     {
